@@ -1,0 +1,11 @@
+apiVersion: v1    #描述文件遵循v1版本的Kubernetes API
+kind: Pod   #在描述一个pod
+metadata:   #pod的元数据（名称、标签和注释等）
+  name: kubia-manual    #pod的名称
+spec:   #pod的规格/内容（pod的容器列表、volume等）
+  containers:
+  - image: luksa/kubia    #创建容器所用的镜像
+    name: kubia   #容器的名称
+    ports:
+    - containerPort: 8080   #监听所用的端口
+      protocol: TCP
