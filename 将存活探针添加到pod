@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-liveness
+spec:
+  containers:
+  - image: luksa/kubia-unhealthy
+    name: kubia
+    livenessProbe:    #一个HTTP GET存活探针
+      httpGet:
+        path: /   #HTTP路径请求
+        port: 8080    #探针连接的网络接口
