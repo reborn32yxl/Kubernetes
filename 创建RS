@@ -1,0 +1,17 @@
+apiVersion: apps/v1beta2    #实验中v1版本可以，v1beta1版本不行
+kind: ReplicaSet
+metadata:
+  name: kubia
+spec:
+  replicas: 3
+  selector:   #RS的matchLabels选择器
+    matchLabels:
+      app: kubia
+  template:   #模版
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - name: kubia
+        image: luksa/kubia
