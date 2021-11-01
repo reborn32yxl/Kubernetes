@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-gpu
+spec:
+  nodeSelector:   #节点选择器要求只将pod部署到包含标签gpu=true的节点上
+    gpu: "true"
+  containers:
+  - image: luksa/kubia
+    name: kubia
