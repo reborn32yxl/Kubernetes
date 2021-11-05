@@ -1,0 +1,20 @@
+## 许多批处理任务需要在特定的时间运行，或者在指定的时间重复运行
+## 在配置的时间，Kubernetes将根据Cronjob对象中配置的job模版创建job资源
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: batch-job-every-fifteen-minutes
+spec:
+  schedule: "0,15,30,45 * * * *"    # 时间表分别代表：分钟、小时、每月中的第几天、月、星期几
+  startingDeadlineSeconds: 15   # pod最迟必须在预定时间后15秒开始运行
+  jobTemplate:    # 此cronjob创建job资源会用到的模版
+    spec:
+      template:
+        metadata:
+          labels:
+            app: periodic-batch-job
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: main
+            image: luksa/batch-job
