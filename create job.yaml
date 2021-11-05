@@ -1,0 +1,15 @@
+#job资源允许运行一种pod，该pod在内部进程成功结束时，不重启容器，一旦任务完成，pod就会被认为处于完成状态
+apiVersion: batch/v1 
+kind: Job
+metadata:
+  name: batch-job
+spec:
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      restartPolicy: OnFailure      #job不能使用Always默认的重新启动策略
+      containers:
+      - name: main
+        image: luksa/batch-job
