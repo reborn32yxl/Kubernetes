@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multi-completion-batch-job
+spec:
+  completions: 5    #将completions设置成5，将此作业顺序运行五个pod
+  parallelism: 2    #最多两个pod可以并行运行
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: main
+        image: luksa/batch-job
